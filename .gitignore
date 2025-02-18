@@ -3,5 +3,6 @@ out/
 .vs/
 .vscode/
 .idea/
+.direnv/
 tmp/
 config.json
