@@ -46,9 +46,9 @@ jobs:
 
     - name: Download latest relase of D++
       run: |
-        apt install wget
+        sudo apt install -y wget
         wget -O dpp.deb https://dl.dpp.dev/
-        dpkg -i dpp.deb      
+        sudo dpkg -i dpp.deb      
 
     # Initializes the CodeQL tools for scanning.
     - name: Initialize CodeQL
