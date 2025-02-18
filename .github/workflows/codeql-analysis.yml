@@ -46,7 +46,7 @@ jobs:
 
     - name: Download latest relase of D++
       run: |
-        sudo apt install -y wget
+        sudo apt install -y wget libopus0
         wget -O dpp.deb https://dl.dpp.dev/
         sudo dpkg -i dpp.deb      
 
