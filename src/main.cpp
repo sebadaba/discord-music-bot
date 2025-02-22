@@ -22,8 +22,18 @@ int main(int argc, char const *argv[])
 
     /* Handle slash command */
     bot.on_slashcommand([](const dpp::slashcommand_t& event) {
-         if (event.command.get_command_name() == "ping") {
+        if (event.command.get_command_name() == "ping") {
             event.reply("Pong!");
+        }
+        else if (event.command.get_command_name() == "join") {
+            dpp::guild* g = dpp::find_guild(event.command.guild_id);
+	 
+	        /* Attempt to connect to a voice channel, returns false if we fail to connect. */
+	        if (!g->connect_member_voice(event.command.get_issuing_user().id)) {
+	            event.reply("You don't seem to be in a voice channel!");
+                return;
+            }
+            event.reply("Joined your channel!");
         }
     });
 
@@ -32,6 +42,7 @@ int main(int argc, char const *argv[])
         /* Wrap command registration in run_once to make sure it doesnt run on every full reconnection */
         if (dpp::run_once<struct register_bot_commands>()) {
             bot.global_command_create(dpp::slashcommand("ping", "Ping pong!", bot.me.id));
+            bot.global_command_create(dpp::slashcommand("join", "Joins your voice channel.", bot.me.id));
         }
     });
 
