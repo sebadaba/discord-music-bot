@@ -25,6 +25,7 @@ int main(int argc, char const *argv[])
         if (event.command.get_command_name() == "ping") {
             event.reply("Pong!");
         }
+<<<<<<< HEAD
         else if (event.command.get_command_name() == "join") {
             dpp::guild* g = dpp::find_guild(event.command.guild_id);
 	 
@@ -34,6 +35,13 @@ int main(int argc, char const *argv[])
                 return;
             }
             event.reply("Joined your channel!");
+=======
+        else if (event.command.get_command_name() == "download") {
+            std::string url = std::get<std::string>(event.get_parameter("url"));
+            std::string path = "";
+            get_yt_audio(url, path);
+            event.reply("Audio del video guardado!");
+>>>>>>> feature/youtube-download
         }
     });
 
@@ -42,7 +50,14 @@ int main(int argc, char const *argv[])
         /* Wrap command registration in run_once to make sure it doesnt run on every full reconnection */
         if (dpp::run_once<struct register_bot_commands>()) {
             bot.global_command_create(dpp::slashcommand("ping", "Ping pong!", bot.me.id));
+<<<<<<< HEAD
             bot.global_command_create(dpp::slashcommand("join", "Joins your voice channel.", bot.me.id));
+=======
+
+            dpp::slashcommand cmd_download = dpp::slashcommand("download", "Descarga el video de Youtube provisto", bot.me.id);
+            cmd_download.add_option(dpp::command_option(dpp::co_string, "url", "URL del video de Youtube a descargar", true));
+            bot.global_command_create(cmd_download);
+>>>>>>> feature/youtube-download
         }
     });
 

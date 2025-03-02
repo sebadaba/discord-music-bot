@@ -14,6 +14,7 @@
         cmake
         dpp
         openssl
+        yt-dlp
       ];
 
       shellHook = ''
